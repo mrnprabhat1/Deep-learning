@@ -30,5 +30,19 @@ Flower
 Cocoa pod
 
 Annotation format. Pascal VOC XML
+Data Augmentation
+A comprehensive data augmentation pipeline was implemented to expand the dataset while maintaining annotation consistency.
+
+Augmentation techniques include.
+
+Geometric transformations such as flipping, rotation, scaling, and translation
+
+Color and illumination variations including brightness, contrast, hue, and saturation
+
+Noise and blur effects to simulate real world conditions
+
+Random cropping followed by resizing
+
+Bounding boxes are transformed together with images, and invalid annotations are automatically filtered to ensure data quality.
 
 The images were collected under real field conditions and annotated manually. Due to the limited dataset size, data augmentation plays a critical role in model training.
