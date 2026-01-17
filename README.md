@@ -1,48 +1,75 @@
-Cocoa Flower and Cocoa Pod Detection using Deep Learning
-Project Overview
-This repository presents a deep learning based object detection pipeline for identifying cocoa flowers and cocoa pods in natural field images. The primary objective of the project is to demonstrate the feasibility of applying modern object detection techniques to agricultural monitoring tasks under limited data conditions.
+# Cocoa Flower and Cocoa Pod Detection Using Deep Learning
 
-The project focuses on two key aspects. First, a label consistent data augmentation strategy is used to address the challenge of small annotated datasets. Second, a two stage deep learning detector is trained and evaluated to localize cocoa flowers and pods using bounding boxes.
-Key Contributions
+## Project Overview
+This repository presents a deep learning based object detection pipeline for identifying cocoa flowers and cocoa pods in natural field images.  
+The objective of this project is to demonstrate the feasibility of applying modern object detection techniques to agricultural monitoring tasks under limited data conditions.
 
-Design of a label consistent data augmentation pipeline for object detection
+The project emphasizes two main components.  
+Data augmentation with label consistency and deep learning based object detection using a two stage detector.
 
-Handling of Pascal VOC XML annotations with bounding box validation
+## Key Contributions
+- Label consistent data augmentation for object detection
+- Robust handling of Pascal VOC XML annotations
+- Bounding box validation and filtering
+- Training of a Faster R CNN based detector
+- IoU based quantitative evaluation
+- Visualization of ground truth and predictions
 
-Training of a Faster R CNN based object detection model
+## Dataset Description
+- Data type: RGB field images
+- Original images: 14
+- Augmented images: 42
+- Total dataset size: 56 images
+- Object classes:
+  - Flower
+  - Cocoa pod
+- Annotation format: Pascal VOC XML
 
-IoU based quantitative evaluation using precision, recall, and F1 score
+Images were collected under real field conditions and manually annotated.  
+Due to the limited dataset size, data augmentation plays a critical role in model training.
 
-Visualization of ground truth and predicted bounding boxes
+## Data Augmentation
+A comprehensive data augmentation pipeline is implemented to increase dataset diversity while preserving annotation correctness.
 
-Dataset Description
+Augmentation techniques include:
+- Geometric transformations such as flip, rotation, scaling, and translation
+- Color and lighting variation including brightness, contrast, hue, and saturation
+- Noise and blur effects to simulate real world conditions
+- Random crop followed by resizing
 
-Data type. RGB field images
+Bounding boxes are transformed together with images.  
+Invalid or extremely small bounding boxes are automatically filtered.
 
-Original dataset size. 14 images
+## Model Architecture
+- Detection framework: Faster R CNN
+- Backbone network: ResNet50 with Feature Pyramid Network
+- Pretrained weights: COCO dataset
+- Detection head customized for two object classes and background
 
-Augmented dataset size. 56 images
+The two stage architecture is selected to prioritize detection accuracy over inference speed.
 
-Object classes
+## Training Configuration
+- Framework: PyTorch and Torchvision
+- Optimizer: Stochastic Gradient Descent
+- Learning rate: 0.005
+- Batch size: 2
+- Training epochs: 100
+- Execution environment: Google Colab GPU
 
-Flower
+## Evaluation Methodology
+Model performance is evaluated on the validation dataset using an IoU based matching strategy.
 
-Cocoa pod
+Evaluation details:
+- Confidence threshold: 0.7
+- IoU threshold: 0.7
+- Metrics reported:
+  - Precision
+  - Recall
+  - F1 score
 
-Annotation format. Pascal VOC XML
-Data Augmentation
-A comprehensive data augmentation pipeline was implemented to expand the dataset while maintaining annotation consistency.
+Standard mean average precision is not reported due to the small dataset size.  
+The selected metrics provide interpretable performance evaluation under strict localization constraints.
 
-Augmentation techniques include.
+## Project Structure
+Example augmented data structure:
 
-Geometric transformations such as flipping, rotation, scaling, and translation
-
-Color and illumination variations including brightness, contrast, hue, and saturation
-
-Noise and blur effects to simulate real world conditions
-
-Random cropping followed by resizing
-
-Bounding boxes are transformed together with images, and invalid annotations are automatically filtered to ensure data quality.
-
-The images were collected under real field conditions and annotated manually. Due to the limited dataset size, data augmentation plays a critical role in model training.
